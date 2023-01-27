@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: d7f6871a00000000af1c54203fdfee7a
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -380,9 +380,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8afa0507116250478db3f6694fb9cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 7
-  height: 7
+  _width: 7
+  _height: 7
   _bgTilePrefab: {fileID: 4824603125688014426, guid: 6084bb89f3fc39a48b593594a7b2f387, type: 3}
+  _gems:
+  - {fileID: 4751026199517473177, guid: af48c10497cff844ea9d1d53584e03ac, type: 3}
+  - {fileID: 267162612091555268, guid: 4440b5acee841a641a8479e24129567a, type: 3}
+  - {fileID: 3510924821347339071, guid: 5b09d325d02f1aa42bb2d40de190e746, type: 3}
+  - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+  - {fileID: 947030424992002762, guid: 0e79194535e3c99429c929fe8fa69b29, type: 3}
 --- !u!4 &1634288630
 Transform:
   m_ObjectHideFlags: 0
