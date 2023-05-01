@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public partial class Gem : MonoBehaviour
@@ -15,6 +16,8 @@ public partial class Gem : MonoBehaviour
     public GemType type;
 
     public bool isMatched;
+    
+    private Vector2Int previousPosition;
 
     void Start()
     {
@@ -66,6 +69,7 @@ public partial class Gem : MonoBehaviour
 
     private void MovePieces()
     {
+        previousPosition = _positionIndex;
         // If angle between 45 and -45 move the piece to the right
         if (swipeAngle < 45 && swipeAngle > -45 && _positionIndex.x < board.width - 1)
         {
@@ -94,5 +98,26 @@ public partial class Gem : MonoBehaviour
         }
         board.allGems[_positionIndex.x, _positionIndex.y] = this;
         board.allGems[otherGem._positionIndex.x, otherGem._positionIndex.y] = otherGem;
+
+        StartCoroutine(CheckMoveCoroutine());
+    }
+
+    public IEnumerator CheckMoveCoroutine()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        board.matchFinder.FindAllMatches();
+
+        if (otherGem != null)
+        {
+            if (!isMatched && !otherGem.isMatched)
+            {
+                otherGem._positionIndex = _positionIndex;
+                _positionIndex = previousPosition;
+
+                board.allGems[_positionIndex.x, _positionIndex.y] = this;
+                board.allGems[otherGem._positionIndex.x, otherGem._positionIndex.y] = otherGem;
+            }
+        }
     }
 }

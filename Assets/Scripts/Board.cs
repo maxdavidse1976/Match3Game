@@ -12,7 +12,8 @@ public class Board : MonoBehaviour
 
     public float gemSpeed;
 
-    private MatchFinder matchFinder;
+    [HideInInspector]
+    public MatchFinder matchFinder;
 
     private void Awake()
     {
@@ -43,6 +44,13 @@ public class Board : MonoBehaviour
                 bgTile.name = $"BG Tile - {x},{y}";
 
                 int gemToUse = Random.Range(0, _gems.Length);
+
+                int iterations = 0;
+                while (MatchesAt(new Vector2Int(x, y), _gems[gemToUse]) && iterations < 100)
+                {
+                    gemToUse = Random.Range(0, _gems.Length);
+                    iterations++;
+                }
                 SpawnGem(new Vector2Int(x, y), _gems[gemToUse]);
             }
         }
@@ -56,5 +64,27 @@ public class Board : MonoBehaviour
         allGems[position.x, position.y] = gem;
 
         gem.SetupGem(position, this);
+    }
+
+    private bool MatchesAt(Vector2Int positionToCheck, Gem gemToCheck)
+    {
+        if (positionToCheck.x > 1)
+        {
+            if (allGems[positionToCheck.x - 1, positionToCheck.y].type == gemToCheck.type
+                && allGems[positionToCheck.x - 2, positionToCheck.y].type == gemToCheck.type)
+            {
+                return true;
+            }
+        }
+
+        if (positionToCheck.y > 1)
+        {
+            if (allGems[positionToCheck.x, positionToCheck.y - 1].type == gemToCheck.type
+                && allGems[positionToCheck.x, positionToCheck.y - 2].type == gemToCheck.type)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
