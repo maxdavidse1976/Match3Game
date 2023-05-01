@@ -2,25 +2,39 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField] private int _width;
-    [SerializeField] private int _height;
+    public int width;
+    public int height;
     [SerializeField] private GameObject _bgTilePrefab;
 
     [SerializeField] private Gem[] _gems;
 
-    private Gem[,] _allGems;
+    public Gem[,] allGems;
 
+    public float gemSpeed;
+
+    private MatchFinder matchFinder;
+
+    private void Awake()
+    {
+        matchFinder = FindObjectOfType<MatchFinder>();
+    }
     void Start()
     {
-        _allGems = new Gem[_width, _height];
+        allGems = new Gem[width, height];
         Setup();
+    }
+
+    private void Update()
+    {
+        matchFinder.FindAllMatches();
     }
 
     private void Setup()
     {
-        for(int x = 0; x < _width; x++)
+        Debug.Log("Getting here!");
+        for (int x = 0; x < width; x++)
         {
-            for(int y = 0; y < _height; y++)
+            for(int y = 0; y < height; y++)
             {
                 Vector2 position = new Vector2(x, y);
                 GameObject bgTile = Instantiate(_bgTilePrefab, position, Quaternion.identity);
@@ -39,7 +53,7 @@ public class Board : MonoBehaviour
         Gem gem = Instantiate(gemToSpawn, new Vector3(position.x, position.y, 0), Quaternion.identity);
         gem.transform.parent = transform;
         gem.name = $"Gem {position.x}, {position.y}";
-        _allGems[position.x, position.y] = gem;
+        allGems[position.x, position.y] = gem;
 
         gem.SetupGem(position, this);
     }

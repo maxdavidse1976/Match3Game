@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &131184735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 131184737}
+  - component: {fileID: 131184736}
+  m_Layer: 0
+  m_Name: MatchFinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &131184736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131184735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4704a61a88355ef41af04eb01302bb20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &131184737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131184735}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.6913952, y: 0.12359306, z: 0.060752716}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,8 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8afa0507116250478db3f6694fb9cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 7
-  _height: 7
+  width: 7
+  height: 7
   _bgTilePrefab: {fileID: 4824603125688014426, guid: 6084bb89f3fc39a48b593594a7b2f387, type: 3}
   _gems:
   - {fileID: 4751026199517473177, guid: af48c10497cff844ea9d1d53584e03ac, type: 3}
@@ -389,6 +433,7 @@ MonoBehaviour:
   - {fileID: 3510924821347339071, guid: 5b09d325d02f1aa42bb2d40de190e746, type: 3}
   - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
   - {fileID: 947030424992002762, guid: 0e79194535e3c99429c929fe8fa69b29, type: 3}
+  gemSpeed: 7
 --- !u!4 &1634288630
 Transform:
   m_ObjectHideFlags: 0
