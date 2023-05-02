@@ -3,7 +3,7 @@ using UnityEngine;
 
 public partial class Gem : MonoBehaviour
 {
-    private Vector2Int _positionIndex;
+    [HideInInspector] public Vector2Int positionIndex;
     [HideInInspector] public Board board;
 
     private Vector2 firstTouchPosition;
@@ -26,14 +26,14 @@ public partial class Gem : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(transform.position, _positionIndex) > .01f)
+        if (Vector2.Distance(transform.position, positionIndex) > .01f)
         {
-            transform.position = Vector2.Lerp(transform.position, _positionIndex, board.gemSpeed * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, positionIndex, board.gemSpeed * Time.deltaTime);
         }
         else
         {
-            transform.position = new Vector3(_positionIndex.x, _positionIndex.y, 0f);
-            board.allGems[_positionIndex.x, _positionIndex.y] = this;
+            transform.position = new Vector3(positionIndex.x, positionIndex.y, 0f);
+            board.allGems[positionIndex.x, positionIndex.y] = this;
         }
 
         if (mousePressed && Input.GetMouseButtonUp(0))
@@ -46,7 +46,7 @@ public partial class Gem : MonoBehaviour
 
     public void SetupGem(Vector2Int position, Board theBoard)
     {
-        _positionIndex = position;
+        positionIndex = position;
         board = theBoard;
     }
 
@@ -69,35 +69,35 @@ public partial class Gem : MonoBehaviour
 
     private void MovePieces()
     {
-        previousPosition = _positionIndex;
+        previousPosition = positionIndex;
         // If angle between 45 and -45 move the piece to the right
-        if (swipeAngle < 45 && swipeAngle > -45 && _positionIndex.x < board.width - 1)
+        if (swipeAngle < 45 && swipeAngle > -45 && positionIndex.x < board.width - 1)
         {
-            otherGem = board.allGems[_positionIndex.x + 1, _positionIndex.y];
-            otherGem._positionIndex.x--;
-            _positionIndex.x++;
+            otherGem = board.allGems[positionIndex.x + 1, positionIndex.y];
+            otherGem.positionIndex.x--;
+            positionIndex.x++;
         }
         // If angle between 135 and 45 move the piece up
-        else if (swipeAngle > 45 && swipeAngle <= 135 && _positionIndex.x < board.height - 1)
+        else if (swipeAngle > 45 && swipeAngle <= 135 && positionIndex.x < board.height - 1)
         {
-            otherGem = board.allGems[_positionIndex.x, _positionIndex.y + 1];
-            otherGem._positionIndex.y--;
-            _positionIndex.y++;
+            otherGem = board.allGems[positionIndex.x, positionIndex.y + 1];
+            otherGem.positionIndex.y--;
+            positionIndex.y++;
         }
-        else if (swipeAngle < -45 && swipeAngle >= -135 && _positionIndex.y > 0)
+        else if (swipeAngle < -45 && swipeAngle >= -135 && positionIndex.y > 0)
         {
-            otherGem = board.allGems[_positionIndex.x, _positionIndex.y - 1];
-            otherGem._positionIndex.y++;
-            _positionIndex.y--;
+            otherGem = board.allGems[positionIndex.x, positionIndex.y - 1];
+            otherGem.positionIndex.y++;
+            positionIndex.y--;
         }
-        else if (swipeAngle > 135 || swipeAngle < -135 && _positionIndex.x > 0)
+        else if (swipeAngle > 135 || swipeAngle < -135 && positionIndex.x > 0)
         {
-            otherGem = board.allGems[_positionIndex.x - 1, _positionIndex.y];
-            otherGem._positionIndex.x++;
-            _positionIndex.x--;
+            otherGem = board.allGems[positionIndex.x - 1, positionIndex.y];
+            otherGem.positionIndex.x++;
+            positionIndex.x--;
         }
-        board.allGems[_positionIndex.x, _positionIndex.y] = this;
-        board.allGems[otherGem._positionIndex.x, otherGem._positionIndex.y] = otherGem;
+        board.allGems[positionIndex.x, positionIndex.y] = this;
+        board.allGems[otherGem.positionIndex.x, otherGem.positionIndex.y] = otherGem;
 
         StartCoroutine(CheckMoveCoroutine());
     }
@@ -112,11 +112,15 @@ public partial class Gem : MonoBehaviour
         {
             if (!isMatched && !otherGem.isMatched)
             {
-                otherGem._positionIndex = _positionIndex;
-                _positionIndex = previousPosition;
+                otherGem.positionIndex = positionIndex;
+                positionIndex = previousPosition;
 
-                board.allGems[_positionIndex.x, _positionIndex.y] = this;
-                board.allGems[otherGem._positionIndex.x, otherGem._positionIndex.y] = otherGem;
+                board.allGems[positionIndex.x, positionIndex.y] = this;
+                board.allGems[otherGem.positionIndex.x, otherGem.positionIndex.y] = otherGem;
+            }
+            else
+            {
+                board.DestroyMatches();
             }
         }
     }
