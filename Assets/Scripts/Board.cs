@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Board : MonoBehaviour
+public partial class Board : MonoBehaviour
 {
     public int width;
     public int height;
@@ -17,6 +17,8 @@ public class Board : MonoBehaviour
     [HideInInspector]
     public MatchFinder matchFinder;
 
+    public BoardState currentState = BoardState.Move;
+
     private void Awake()
     {
         matchFinder = FindObjectOfType<MatchFinder>();
@@ -29,7 +31,7 @@ public class Board : MonoBehaviour
 
     private void Update()
     {
-        matchFinder.FindAllMatches();
+        //matchFinder.FindAllMatches();
     }
 
     private void Setup()
@@ -150,8 +152,13 @@ public class Board : MonoBehaviour
         matchFinder.FindAllMatches();
         if (matchFinder.currentMatches.Count > 0)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.5f);
             DestroyMatches();
+        }
+        else
+        {
+            yield return new WaitForSeconds(.5f);
+            currentState = BoardState.Move;
         }
 
     }
