@@ -6,6 +6,7 @@
         green, 
         red, 
         yellow, 
-        purple
+        purple,
+        bomb
     }
 }

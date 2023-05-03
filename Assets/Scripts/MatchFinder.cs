@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
 using System.Linq;
+using System.Xml.Serialization;
 
 public class MatchFinder : MonoBehaviour
 {
@@ -73,5 +74,77 @@ public class MatchFinder : MonoBehaviour
         {
             currentMatches = currentMatches.Distinct().ToList();
         }
+        CheckForBombs();
+    }
+
+    public void CheckForBombs()
+    {
+        for(int i = 0; i < currentMatches.Count; i++)
+        {
+            Gem gem = currentMatches[i];
+            
+            int x = gem.positionIndex.x;
+            int y = gem.positionIndex.y;
+
+            if (gem.positionIndex.x > 0)
+            {
+                if (board.allGems[x - 1, y] != null)
+                {
+                    if (board.allGems[x - 1, y].type == Gem.GemType.bomb)
+                    {
+                        MarkBombArea(new Vector2Int(x - 1, y), board.allGems[x - 1, y]);
+                    }
+                }
+            }
+            if (gem.positionIndex.x < board.width - 1)
+            {
+                if (board.allGems[x + 1, y] != null)
+                {
+                    if (board.allGems[x + 1, y].type == Gem.GemType.bomb)
+                    {
+                        MarkBombArea(new Vector2Int(x + 1, y), board.allGems[x + 1, y]);
+                    }
+                }
+            }
+            if (gem.positionIndex.y > 0)
+            {
+                if (board.allGems[x, y - 1] != null)
+                {
+                    if (board.allGems[x, y - 1].type == Gem.GemType.bomb)
+                    {
+                        MarkBombArea(new Vector2Int(x, y - 1), board.allGems[x, y - 1]);
+                    }
+                }
+            }
+            if (gem.positionIndex.y < board.height - 1)
+            {
+                if (board.allGems[x, y + 1] != null)
+                {
+                    if (board.allGems[x, y + 1].type == Gem.GemType.bomb)
+                    {
+                        MarkBombArea(new Vector2Int(x, y + 1), board.allGems[x, y + 1]);
+                    }
+                }
+            }
+        }
+    }
+
+    public void MarkBombArea(Vector2Int bombPosition, Gem theBomb)
+    {
+        for(int x = bombPosition.x - theBomb.blastRadius; x <= bombPosition.x + theBomb.blastRadius; x++)
+        {
+            for(int y = bombPosition.y - theBomb.blastRadius; y <= bombPosition.y + theBomb.blastRadius; y++)
+            {
+                if (x >= 0 && x < board.width && y >= 0 && y < board.height)
+                {
+                    if (board.allGems[x, y] != null)
+                    {
+                        board.allGems[x, y].isMatched = true;
+                        currentMatches.Add(board.allGems[x, y]);
+                    }
+                }
+            }
+        }
+        currentMatches = currentMatches.Distinct().ToList();
     }
 }
