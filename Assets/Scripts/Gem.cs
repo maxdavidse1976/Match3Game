@@ -19,6 +19,8 @@ public partial class Gem : MonoBehaviour
     
     private Vector2Int previousPosition;
 
+    public GameObject destroyEffect;
+
     void Start()
     {
         

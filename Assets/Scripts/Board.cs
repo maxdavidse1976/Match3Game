@@ -98,6 +98,7 @@ public partial class Board : MonoBehaviour
         {
             if (allGems[position.x, position.y].isMatched)
             {
+                Instantiate(allGems[position.x, position.y].destroyEffect, new Vector2(position.x, position.y), Quaternion.identity);
                 Destroy(allGems[position.x, position.y].gameObject);
                 allGems[position.x, position.y] = null;
             }

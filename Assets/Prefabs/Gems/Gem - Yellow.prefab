@@ -98,8 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecdd29fbb107d74a9a6a44b7e59e3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionIndex: {x: 0, y: 0}
   board: {fileID: 0}
   type: 3
+  isMatched: 0
+  destroyEffect: {fileID: 472011389542445174, guid: 96de09a891628e44cafa01d2cb843f29, type: 3}
 --- !u!61 &2590685952783366681
 BoxCollider2D:
   m_ObjectHideFlags: 0
