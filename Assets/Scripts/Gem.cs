@@ -23,6 +23,8 @@ public partial class Gem : MonoBehaviour
 
     public int blastRadius = 2;
 
+    public int scoreValue = 10;
+
     void Start()
     {
         
@@ -59,7 +61,7 @@ public partial class Gem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (board.currentState == Board.BoardState.Move)
+        if (board.currentState == Board.BoardState.Move && board.roundManager.roundTime > 0)
         {
             firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePressed = true;

@@ -22,9 +22,12 @@ public partial class Board : MonoBehaviour
     public Gem bomb;
     public float bombChance = 2f;
 
+    [HideInInspector] public RoundManager roundManager;
+
     private void Awake()
     {
         matchFinder = FindObjectOfType<MatchFinder>();
+        roundManager = FindObjectOfType<RoundManager>();
     }
     void Start()
     {
@@ -35,6 +38,11 @@ public partial class Board : MonoBehaviour
     private void Update()
     {
         //matchFinder.FindAllMatches();
+
+        if (Input.GetKeyDown(KeyCode.S)) 
+        {
+            ShuffleBoard();
+        }
     }
 
     private void Setup()
@@ -78,25 +86,24 @@ public partial class Board : MonoBehaviour
         gem.SetupGem(position, this);
     }
 
-    private bool MatchesAt(Vector2Int positionToCheck, Gem gemToCheck)
+    private bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)
     {
-        if (positionToCheck.x > 1)
+        if (posToCheck.x > 1)
         {
-            if (allGems[positionToCheck.x - 1, positionToCheck.y].type == gemToCheck.type
-                && allGems[positionToCheck.x - 2, positionToCheck.y].type == gemToCheck.type)
+            if (allGems[posToCheck.x - 1, posToCheck.y].type == gemToCheck.type && allGems[posToCheck.x - 2, posToCheck.y].type == gemToCheck.type)
             {
                 return true;
             }
         }
 
-        if (positionToCheck.y > 1)
+        if (posToCheck.y > 1)
         {
-            if (allGems[positionToCheck.x, positionToCheck.y - 1].type == gemToCheck.type
-                && allGems[positionToCheck.x, positionToCheck.y - 2].type == gemToCheck.type)
+            if (allGems[posToCheck.x, posToCheck.y - 1].type == gemToCheck.type && allGems[posToCheck.x, posToCheck.y - 2].type == gemToCheck.type)
             {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -119,6 +126,7 @@ public partial class Board : MonoBehaviour
         {
             if (matchFinder.currentMatches[i] != null)
             {
+                ScoreCheck(matchFinder.currentMatches[i]);
                 DestroyMatchedGemAt(matchFinder.currentMatches[i].positionIndex);
             }
         }
@@ -208,5 +216,45 @@ public partial class Board : MonoBehaviour
         {
             Destroy(gem.gameObject);
         }
+    }
+
+    public void ShuffleBoard()
+    {
+        if (currentState != BoardState.Wait)
+        {
+            currentState = BoardState.Wait;
+            List<Gem> gemsFromBoard = new List<Gem>();
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    gemsFromBoard.Add(allGems[x, y]);
+                    allGems[x, y] = null;
+                }
+            }
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    int gemToUse = Random.Range(0, gemsFromBoard.Count);
+                    int iterations = 0;
+                    while(MatchesAt(new Vector2Int(x, y), gemsFromBoard[gemToUse]) && iterations < 100 && gemsFromBoard.Count > 1)
+                    {
+                        gemToUse = Random.Range(0, gemsFromBoard.Count);
+                        iterations++;
+                    }
+                    gemsFromBoard[gemToUse].SetupGem(new Vector2Int(x, y), this);
+                    allGems[x, y] = gemsFromBoard[gemToUse];
+                    gemsFromBoard.RemoveAt(gemToUse);
+                }
+            }
+            StartCoroutine(FillBoardCoroutine());
+        }
+    }
+
+    public void ScoreCheck(Gem gemToCheck)
+    {
+        roundManager.currentScore += gemToCheck.scoreValue;
     }
 }
