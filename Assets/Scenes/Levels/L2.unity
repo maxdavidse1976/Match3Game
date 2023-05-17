@@ -255,7 +255,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 3.95
+  orthographic size: 2.9011333
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 3, z: -10}
+  m_LocalPosition: {x: -0.26, y: 2.02, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -421,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766701681}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 3, z: 0}
+  m_LocalPosition: {x: 2, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -474,7 +474,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 7.4, y: 7.4}
+  m_Size: {x: 5.4, y: 5.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -572,7 +572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327364522}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 3, z: 0}
+  m_LocalPosition: {x: 2, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -625,7 +625,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 7, y: 7}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -660,15 +660,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8afa0507116250478db3f6694fb9cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 7
-  height: 7
+  width: 5
+  height: 5
   _bgTilePrefab: {fileID: 4824603125688014426, guid: 6084bb89f3fc39a48b593594a7b2f387, type: 3}
   _gems:
   - {fileID: 4751026199517473177, guid: af48c10497cff844ea9d1d53584e03ac, type: 3}
   - {fileID: 267162612091555268, guid: 4440b5acee841a641a8479e24129567a, type: 3}
   - {fileID: 3510924821347339071, guid: 5b09d325d02f1aa42bb2d40de190e746, type: 3}
   - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
-  - {fileID: 947030424992002762, guid: 0e79194535e3c99429c929fe8fa69b29, type: 3}
   gemSpeed: 7
   matchFinder: {fileID: 0}
   currentState: 1
@@ -719,7 +718,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769260200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 3, z: 0}
+  m_LocalPosition: {x: 2, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -772,7 +771,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 7.2, y: 7.2}
+  m_Size: {x: 5.2, y: 5.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
