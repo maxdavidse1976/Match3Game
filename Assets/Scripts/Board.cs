@@ -16,6 +16,7 @@ public partial class Board : MonoBehaviour
 
     [HideInInspector]
     public MatchFinder matchFinder;
+    private UIManager uiManager;
 
     public BoardState currentState = BoardState.Move;
 
@@ -24,10 +25,14 @@ public partial class Board : MonoBehaviour
 
     [HideInInspector] public RoundManager roundManager;
 
+    private float bonusMultiplier;
+    public float bonusAmount = .5f;
+
     private void Awake()
     {
         matchFinder = FindObjectOfType<MatchFinder>();
         roundManager = FindObjectOfType<RoundManager>();
+        uiManager = FindObjectOfType<UIManager>();
     }
     void Start()
     {
@@ -169,13 +174,17 @@ public partial class Board : MonoBehaviour
         matchFinder.FindAllMatches();
         if (matchFinder.currentMatches.Count > 0)
         {
+            bonusMultiplier++;
             yield return new WaitForSeconds(.5f);
             DestroyMatches();
+            uiManager.multiplierText.text = bonusMultiplier.ToString();
         }
         else
         {
             yield return new WaitForSeconds(.5f);
             currentState = BoardState.Move;
+            bonusMultiplier = 0;
+            uiManager.multiplierText.text = bonusMultiplier.ToString();
         }
 
     }
@@ -256,5 +265,11 @@ public partial class Board : MonoBehaviour
     public void ScoreCheck(Gem gemToCheck)
     {
         roundManager.currentScore += gemToCheck.scoreValue;
+
+        if (bonusMultiplier > 0)
+        {
+            float bonusToAdd = gemToCheck.scoreValue * bonusMultiplier * bonusAmount;
+            roundManager.currentScore += Mathf.RoundToInt(bonusToAdd);
+        }
     }
 }
