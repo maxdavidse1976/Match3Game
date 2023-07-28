@@ -23,10 +23,4 @@ public class UIManager : MonoBehaviour
         winStarsTwo.SetActive(false);
         winStarsThree.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

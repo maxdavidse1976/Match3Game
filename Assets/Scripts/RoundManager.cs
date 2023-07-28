@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
+    private UIManager _uiManager;
+    private Board _board;
+    private bool _endingRound = false;
+
     public float roundTime = 60f;
     public int currentScore = 0;
     public float displayScore = 0;
     public float scoreSpeed = 0;
 
-    private UIManager uiManager;
-
-    private bool endingRound = false;
-    private Board board;
-
     public int scoreTarget1, scoreTarget2, scoreTarget3;
 
-    private void Awake()
+    void Awake()
     {
-        uiManager = FindObjectOfType<UIManager>();
-        board = FindObjectOfType<Board>();
+        _uiManager = FindObjectOfType<UIManager>();
+        _board = FindObjectOfType<Board>();
     }
     // Start is called before the first frame update
     void Start()
@@ -37,41 +36,41 @@ public class RoundManager : MonoBehaviour
             if (roundTime <= 0)
             {
                 roundTime = 0;
-                endingRound = true;
+                _endingRound = true;
             }
         }
-        if (endingRound && board.currentState == Board.BoardState.Move)
+        if (_endingRound && _board.currentState == Board.BoardState.Move)
         {
             WinCheck();
-            endingRound=false;
+            _endingRound=false;
         }
-        uiManager.timeText.text = roundTime.ToString("0.0") + "s";
+        _uiManager.timeText.text = roundTime.ToString("0.0") + "s";
         displayScore = Mathf.Lerp(displayScore, currentScore, scoreSpeed * Time.deltaTime);
-        uiManager.scoreText.text = displayScore.ToString("0");
+        _uiManager.scoreText.text = displayScore.ToString("0");
     }
 
-    private void WinCheck()
+    void WinCheck()
     {
-        uiManager.roundOverScreen.SetActive(true);
-        uiManager.winScore.text = currentScore.ToString();
+        _uiManager.roundOverScreen.SetActive(true);
+        _uiManager.winScore.text = currentScore.ToString();
         if (currentScore >= scoreTarget3)
         {
-            uiManager.winText.text = "Congratulations! You earned 3 stars.";
-            uiManager.winStarsThree.SetActive(true);
+            _uiManager.winText.text = "Congratulations! You earned 3 stars.";
+            _uiManager.winStarsThree.SetActive(true);
         }
         if (currentScore < scoreTarget3 && currentScore >= scoreTarget2)
         {
-            uiManager.winText.text = "Congratulations! You earned 2 stars.";
-            uiManager.winStarsTwo.SetActive(true);
+            _uiManager.winText.text = "Congratulations! You earned 2 stars.";
+            _uiManager.winStarsTwo.SetActive(true);
         }
         if (currentScore < scoreTarget2 && currentScore >= scoreTarget1)
         {
-            uiManager.winText.text = "Congratulations! You earned 1 star.";
-            uiManager.winStarsOne.SetActive(true);
+            _uiManager.winText.text = "Congratulations! You earned 1 star.";
+            _uiManager.winStarsOne.SetActive(true);
         }
         if (currentScore < scoreTarget1)
         {
-            uiManager.winText.text = "Oh no! No stars earned this time. Try again?";
+            _uiManager.winText.text = "Oh no! No stars earned this time. Try again?";
         }
     }
 }

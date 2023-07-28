@@ -3,32 +3,24 @@ using UnityEngine;
 
 public partial class Gem : MonoBehaviour
 {
-    [HideInInspector] public Vector2Int positionIndex;
-    [HideInInspector] public Board board;
+    Vector2 _firstTouchPosition;
+    Vector2 _finalTouchPosition;
+    Gem _otherGem;
+    Vector2Int _previousPosition;
 
-    private Vector2 firstTouchPosition;
-    private Vector2 finalTouchPosition;
+    bool _mousePressed;
+    float _swipeAngle = 0;
 
-    private bool mousePressed;
-    private float swipeAngle = 0;
-
-    private Gem otherGem;
+    public GameObject destroyEffect;
     public GemType type;
 
     public bool isMatched;
-    
-    private Vector2Int previousPosition;
-
-    public GameObject destroyEffect;
-
     public int blastRadius = 2;
-
     public int scoreValue = 10;
 
-    void Start()
-    {
-        
-    }
+    [HideInInspector] public Vector2Int positionIndex;
+    [HideInInspector] public Board board;
+
 
     void Update()
     {
@@ -42,12 +34,12 @@ public partial class Gem : MonoBehaviour
             board.allGems[positionIndex.x, positionIndex.y] = this;
         }
 
-        if (mousePressed && Input.GetMouseButtonUp(0))
+        if (_mousePressed && Input.GetMouseButtonUp(0))
         {
-            mousePressed = false;
+            _mousePressed = false;
             if (board.currentState == Board.BoardState.Move)
             {
-                finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                _finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 CalculateAngle();
             }
         }
@@ -59,57 +51,57 @@ public partial class Gem : MonoBehaviour
         board = theBoard;
     }
 
-    private void OnMouseDown()
+    void OnMouseDown()
     {
         if (board.currentState == Board.BoardState.Move && board.roundManager.roundTime > 0)
         {
-            firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePressed = true;
+            _firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            _mousePressed = true;
         }
     }
     
-    private void CalculateAngle()
+    void CalculateAngle()
     {
-        swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x);
-        swipeAngle = swipeAngle * 180 / Mathf.PI;
+        _swipeAngle = Mathf.Atan2(_finalTouchPosition.y - _firstTouchPosition.y, _finalTouchPosition.x - _firstTouchPosition.x);
+        _swipeAngle = _swipeAngle * 180 / Mathf.PI;
 
-        if (Vector3.Distance(firstTouchPosition, finalTouchPosition) > 0.5f)
+        if (Vector3.Distance(_firstTouchPosition, _finalTouchPosition) > 0.5f)
         {
             MovePieces();
         }
     }
 
-    private void MovePieces()
+    void MovePieces()
     {
-        previousPosition = positionIndex;
+        _previousPosition = positionIndex;
         // If angle between 45 and -45 move the piece to the right
-        if (swipeAngle < 45 && swipeAngle > -45 && positionIndex.x < board.width - 1)
+        if (_swipeAngle < 45 && _swipeAngle > -45 && positionIndex.x < board.width - 1)
         {
-            otherGem = board.allGems[positionIndex.x + 1, positionIndex.y];
-            otherGem.positionIndex.x--;
+            _otherGem = board.allGems[positionIndex.x + 1, positionIndex.y];
+            _otherGem.positionIndex.x--;
             positionIndex.x++;
         }
         // If angle between 135 and 45 move the piece up
-        else if (swipeAngle > 45 && swipeAngle <= 135 && positionIndex.x < board.height - 1)
+        else if (_swipeAngle > 45 && _swipeAngle <= 135 && positionIndex.x < board.height - 1)
         {
-            otherGem = board.allGems[positionIndex.x, positionIndex.y + 1];
-            otherGem.positionIndex.y--;
+            _otherGem = board.allGems[positionIndex.x, positionIndex.y + 1];
+            _otherGem.positionIndex.y--;
             positionIndex.y++;
         }
-        else if (swipeAngle < -45 && swipeAngle >= -135 && positionIndex.y > 0)
+        else if (_swipeAngle < -45 && _swipeAngle >= -135 && positionIndex.y > 0)
         {
-            otherGem = board.allGems[positionIndex.x, positionIndex.y - 1];
-            otherGem.positionIndex.y++;
+            _otherGem = board.allGems[positionIndex.x, positionIndex.y - 1];
+            _otherGem.positionIndex.y++;
             positionIndex.y--;
         }
-        else if (swipeAngle > 135 || swipeAngle < -135 && positionIndex.x > 0)
+        else if (_swipeAngle > 135 || _swipeAngle < -135 && positionIndex.x > 0)
         {
-            otherGem = board.allGems[positionIndex.x - 1, positionIndex.y];
-            otherGem.positionIndex.x++;
+            _otherGem = board.allGems[positionIndex.x - 1, positionIndex.y];
+            _otherGem.positionIndex.x++;
             positionIndex.x--;
         }
         board.allGems[positionIndex.x, positionIndex.y] = this;
-        board.allGems[otherGem.positionIndex.x, otherGem.positionIndex.y] = otherGem;
+        board.allGems[_otherGem.positionIndex.x, _otherGem.positionIndex.y] = _otherGem;
 
         StartCoroutine(CheckMoveCoroutine());
     }
@@ -122,15 +114,15 @@ public partial class Gem : MonoBehaviour
 
         board.matchFinder.FindAllMatches();
 
-        if (otherGem != null)
+        if (_otherGem != null)
         {
-            if (!isMatched && !otherGem.isMatched)
+            if (!isMatched && !_otherGem.isMatched)
             {
-                otherGem.positionIndex = positionIndex;
-                positionIndex = previousPosition;
+                _otherGem.positionIndex = positionIndex;
+                positionIndex = _previousPosition;
 
                 board.allGems[positionIndex.x, positionIndex.y] = this;
-                board.allGems[otherGem.positionIndex.x, otherGem.positionIndex.y] = otherGem;
+                board.allGems[_otherGem.positionIndex.x, _otherGem.positionIndex.y] = _otherGem;
 
                 yield return new WaitForSeconds(.5f);
                 board.currentState = Board.BoardState.Move;

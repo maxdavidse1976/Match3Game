@@ -4,35 +4,33 @@ using UnityEngine;
 
 public partial class Board : MonoBehaviour
 {
+    [SerializeField] GameObject _bgTilePrefab;
+    [SerializeField] Gem[] _gems;
+
+    UIManager _uiManager;
+    float _bonusMultiplier;
+
     public int width;
     public int height;
-    [SerializeField] private GameObject _bgTilePrefab;
-
-    [SerializeField] private Gem[] _gems;
-
     public Gem[,] allGems;
 
     public float gemSpeed;
-
-    [HideInInspector]
-    public MatchFinder matchFinder;
-    private UIManager uiManager;
-
     public BoardState currentState = BoardState.Move;
 
     public Gem bomb;
     public float bombChance = 2f;
 
-    [HideInInspector] public RoundManager roundManager;
-
-    private float bonusMultiplier;
     public float bonusAmount = .5f;
 
-    private void Awake()
+    [HideInInspector] public MatchFinder matchFinder;
+    [HideInInspector] public RoundManager roundManager;
+
+
+    void Awake()
     {
         matchFinder = FindObjectOfType<MatchFinder>();
         roundManager = FindObjectOfType<RoundManager>();
-        uiManager = FindObjectOfType<UIManager>();
+        _uiManager = FindObjectOfType<UIManager>();
     }
     void Start()
     {
@@ -40,7 +38,7 @@ public partial class Board : MonoBehaviour
         Setup();
     }
 
-    private void Update()
+    void Update()
     {
         //matchFinder.FindAllMatches();
 
@@ -50,7 +48,7 @@ public partial class Board : MonoBehaviour
         }
     }
 
-    private void Setup()
+    void Setup()
     {
         Debug.Log("Getting here!");
         for (int x = 0; x < width; x++)
@@ -76,7 +74,7 @@ public partial class Board : MonoBehaviour
         }
     }
 
-    private void SpawnGem(Vector2Int position, Gem gemToSpawn)
+    void SpawnGem(Vector2Int position, Gem gemToSpawn)
     {
         if (Random.Range(0f, 100f) < bombChance)
         {
@@ -91,7 +89,7 @@ public partial class Board : MonoBehaviour
         gem.SetupGem(position, this);
     }
 
-    private bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)
+    bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)
     {
         if (posToCheck.x > 1)
         {
@@ -112,7 +110,7 @@ public partial class Board : MonoBehaviour
         return false;
     }
 
-    private void DestroyMatchedGemAt(Vector2Int position)
+    void DestroyMatchedGemAt(Vector2Int position)
     {
         if (allGems[position.x, position.y] != null)
         {
@@ -138,7 +136,7 @@ public partial class Board : MonoBehaviour
         StartCoroutine(DescreaseRowCoroutine());
     }
 
-    private IEnumerator DescreaseRowCoroutine()
+    IEnumerator DescreaseRowCoroutine()
     {
         yield return new WaitForSeconds(.2f);
 
@@ -165,7 +163,7 @@ public partial class Board : MonoBehaviour
         StartCoroutine(FillBoardCoroutine());
     }
 
-    private IEnumerator FillBoardCoroutine()
+    IEnumerator FillBoardCoroutine()
     {
         yield return new WaitForSeconds(.5f);
         RefillBoard();
@@ -174,22 +172,22 @@ public partial class Board : MonoBehaviour
         matchFinder.FindAllMatches();
         if (matchFinder.currentMatches.Count > 0)
         {
-            bonusMultiplier++;
+            _bonusMultiplier++;
             yield return new WaitForSeconds(.5f);
             DestroyMatches();
-            uiManager.multiplierText.text = bonusMultiplier.ToString();
+            _uiManager.multiplierText.text = _bonusMultiplier.ToString();
         }
         else
         {
             yield return new WaitForSeconds(.5f);
             currentState = BoardState.Move;
-            bonusMultiplier = 0;
-            uiManager.multiplierText.text = bonusMultiplier.ToString();
+            _bonusMultiplier = 0;
+            _uiManager.multiplierText.text = _bonusMultiplier.ToString();
         }
 
     }
 
-    private void RefillBoard()
+    void RefillBoard()
     {
         for (int x = 0; x < width; x++)
         {
@@ -206,7 +204,7 @@ public partial class Board : MonoBehaviour
         CheckMisplacedGems();
     }
 
-    private void CheckMisplacedGems()
+    void CheckMisplacedGems()
     {
         List<Gem> foundGems = new List<Gem>();
         foundGems.AddRange(FindObjectsOfType<Gem>());
@@ -266,9 +264,9 @@ public partial class Board : MonoBehaviour
     {
         roundManager.currentScore += gemToCheck.scoreValue;
 
-        if (bonusMultiplier > 0)
+        if (_bonusMultiplier > 0)
         {
-            float bonusToAdd = gemToCheck.scoreValue * bonusMultiplier * bonusAmount;
+            float bonusToAdd = gemToCheck.scoreValue * _bonusMultiplier * bonusAmount;
             roundManager.currentScore += Mathf.RoundToInt(bonusToAdd);
         }
     }
