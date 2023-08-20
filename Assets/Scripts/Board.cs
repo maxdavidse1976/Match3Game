@@ -11,6 +11,8 @@ namespace DSG.Match3
 
         UIManager _uiManager;
         float _bonusMultiplier;
+        BoardLayout _boardLayout;
+        Gem[,] _layoutStore;
 
         public int width;
         public int height;
@@ -33,10 +35,13 @@ namespace DSG.Match3
             matchFinder = FindObjectOfType<MatchFinder>();
             roundManager = FindObjectOfType<RoundManager>();
             _uiManager = FindObjectOfType<UIManager>();
+            _boardLayout = GetComponent<BoardLayout>();
         }
+
         void Start()
         {
             allGems = new Gem[width, height];
+            _layoutStore = new Gem[width, height];
             Setup();
         }
 
@@ -52,7 +57,11 @@ namespace DSG.Match3
 
         void Setup()
         {
-            Debug.Log("Getting here!");
+            if (_boardLayout != null)
+            {
+                _layoutStore = _boardLayout.GetLayout();
+            }
+
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -63,15 +72,22 @@ namespace DSG.Match3
                     bgTile.transform.parent = transform;
                     bgTile.name = $"BG Tile - {x},{y}";
 
-                    int gemToUse = Random.Range(0, _gems.Length);
-
-                    int iterations = 0;
-                    while (MatchesAt(new Vector2Int(x, y), _gems[gemToUse]) && iterations < 100)
+                    if (_layoutStore[x, y] != null)
                     {
-                        gemToUse = Random.Range(0, _gems.Length);
-                        iterations++;
+                        SpawnGem(new Vector2Int(x, y), _layoutStore[x, y]);
                     }
-                    SpawnGem(new Vector2Int(x, y), _gems[gemToUse]);
+                    else
+                    {
+                        int gemToUse = Random.Range(0, _gems.Length);
+
+                        int iterations = 0;
+                        while (MatchesAt(new Vector2Int(x, y), _gems[gemToUse]) && iterations < 100)
+                        {
+                            gemToUse = Random.Range(0, _gems.Length);
+                            iterations++;
+                        }
+                        SpawnGem(new Vector2Int(x, y), _gems[gemToUse]);
+                    }
                 }
             }
         }
