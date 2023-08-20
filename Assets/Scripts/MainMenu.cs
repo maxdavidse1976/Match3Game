@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+namespace DSG.Match3
 {
-    public string levelToLoad;
-
-    public void StartGame()
+    public class MainMenu : MonoBehaviour
     {
-        SceneManager.LoadScene(levelToLoad);
-    }
+        public string levelToLoad;
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void StartGame()
+        {
+            SceneManager.LoadScene(levelToLoad);
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

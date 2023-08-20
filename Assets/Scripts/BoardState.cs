@@ -1,8 +1,11 @@
-﻿public partial class Board
-{
-    public enum BoardState
+﻿namespace DSG.Match3
+{ 
+    public partial class Board
     {
-        Wait, 
-        Move
+        public enum BoardState
+        {
+            Wait, 
+            Move
+        }
     }
 }

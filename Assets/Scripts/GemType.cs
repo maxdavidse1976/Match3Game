@@ -1,12 +1,15 @@
-﻿public partial class Gem
+﻿namespace DSG.Match3
 {
-    public enum GemType
+    public partial class Gem
     {
-        blue, 
-        green, 
-        red, 
-        yellow, 
-        purple,
-        bomb
+        public enum GemType
+        {
+            blue,
+            green,
+            red,
+            yellow,
+            purple,
+            bomb
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using DSG.Match3;
 
 public class MatchFinder : MonoBehaviour
 {
