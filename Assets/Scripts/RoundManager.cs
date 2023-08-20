@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DSG.Match3
 {
@@ -59,16 +60,23 @@ namespace DSG.Match3
             {
                 _uiManager.winText.text = "Congratulations! You earned 3 stars.";
                 _uiManager.winStarsThree.SetActive(true);
+
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star1", 1);
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star2", 1);
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star3", 1);
             }
             if (currentScore < scoreTarget3 && currentScore >= scoreTarget2)
             {
                 _uiManager.winText.text = "Congratulations! You earned 2 stars.";
                 _uiManager.winStarsTwo.SetActive(true);
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star1", 1);
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star2", 1);
             }
             if (currentScore < scoreTarget2 && currentScore >= scoreTarget1)
             {
                 _uiManager.winText.text = "Congratulations! You earned 1 star.";
                 _uiManager.winStarsOne.SetActive(true);
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star1", 1);
             }
             if (currentScore < scoreTarget1)
             {
