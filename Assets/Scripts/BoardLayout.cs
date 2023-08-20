@@ -23,6 +23,7 @@ namespace DSG.Match3
                     }
                 }
             }
+
             return theLayout;
         }
 

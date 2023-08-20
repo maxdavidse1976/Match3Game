@@ -700,35 +700,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allRows:
   - gemsInRow:
+    - {fileID: 9002308704580000591, guid: b229cf4732a90c14a9fc49be13588ff7, type: 3}
     - {fileID: 0}
+    - {fileID: 9002308704580000591, guid: b229cf4732a90c14a9fc49be13588ff7, type: 3}
     - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - gemsInRow:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - gemsInRow:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - gemsInRow:
-    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
-  - gemsInRow:
-    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
-    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
-    - {fileID: 0}
-    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
-    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 9002308704580000591, guid: b229cf4732a90c14a9fc49be13588ff7, type: 3}
 --- !u!1 &1769260200
 GameObject:
   m_ObjectHideFlags: 0

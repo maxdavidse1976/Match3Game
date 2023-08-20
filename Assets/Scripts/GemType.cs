@@ -9,7 +9,8 @@
             red,
             yellow,
             purple,
-            bomb
+            bomb,
+            stone
         }
     }
 }
