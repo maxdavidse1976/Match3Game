@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 3061484886904868485}
   - component: {fileID: 76605453415207030}
   - component: {fileID: 7963898605500824870}
+  - component: {fileID: 6123720944242375595}
   m_Layer: 5
   m_Name: Level Select Button
   m_TagString: Untagged
@@ -368,6 +369,22 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.3019608}
   m_EffectDistance: {x: 3, y: 3}
   m_UseGraphicAlpha: 1
+--- !u!114 &6123720944242375595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335641694286031745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6bb523829a84e44083b7831c5c88fbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelToLoad: L1
+  _star1: {fileID: 8862553477645018201}
+  _star2: {fileID: 7728135160289055251}
+  _star3: {fileID: 1882464623225458546}
 --- !u!1 &7728135160289055251
 GameObject:
   m_ObjectHideFlags: 0
