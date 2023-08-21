@@ -134,6 +134,18 @@ namespace DSG.Match3
             {
                 if (allGems[position.x, position.y].isMatched)
                 {
+                    if (allGems[position.x, position.y].type == Gem.GemType.bomb)
+                    {
+                        SfxManager.instance.PlayExplodeSound();
+                    }
+                    else if (allGems[position.x, position.y].type == Gem.GemType.stone)
+                    {
+                        SfxManager.instance.PlayStoneSound();
+                    }
+                    else
+                    {
+                        SfxManager.instance.PlayGemSound();
+                    }
                     Instantiate(allGems[position.x, position.y].destroyEffect, new Vector2(position.x, position.y), Quaternion.identity);
                     Destroy(allGems[position.x, position.y].gameObject);
                     allGems[position.x, position.y] = null;

@@ -82,6 +82,8 @@ namespace DSG.Match3
             {
                 _uiManager.winText.text = "Oh no! No stars earned this time. Try again?";
             }
+
+            SfxManager.instance.PlayRoundOverSound();
         }
     }
 }
