@@ -195,21 +195,21 @@ namespace DSG.Match3
 
         IEnumerator FillBoardCoroutine()
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.1f);
             RefillBoard();
 
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.1f);
             matchFinder.FindAllMatches();
             if (matchFinder.currentMatches.Count > 0)
             {
                 _bonusMultiplier++;
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(.1f);
                 DestroyMatches();
                 _uiManager.multiplierText.text = _bonusMultiplier.ToString();
             }
             else
             {
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(.1f);
                 currentState = BoardState.Move;
                 _bonusMultiplier = 0;
                 _uiManager.multiplierText.text = _bonusMultiplier.ToString();

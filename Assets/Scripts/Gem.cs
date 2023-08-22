@@ -112,7 +112,7 @@ namespace DSG.Match3
         {
             board.currentState = Board.BoardState.Wait;
 
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.1f);
 
             board.matchFinder.FindAllMatches();
 
@@ -126,7 +126,7 @@ namespace DSG.Match3
                     board.allGems[positionIndex.x, positionIndex.y] = this;
                     board.allGems[_otherGem.positionIndex.x, _otherGem.positionIndex.y] = _otherGem;
 
-                    yield return new WaitForSeconds(.5f);
+                    yield return new WaitForSeconds(.1f);
                     board.currentState = Board.BoardState.Move;
                 }
                 else
