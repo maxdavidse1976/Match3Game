@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 04f08189e3f015843a343e29461d32b4
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Greconian
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 51114d2f52502844dbee05adce21185c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
