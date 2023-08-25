@@ -10,7 +10,9 @@
             yellow,
             purple,
             bomb,
-            stone
+            stone,
+            heart,
+            diamond
         }
     }
 }

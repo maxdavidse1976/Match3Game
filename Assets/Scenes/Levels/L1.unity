@@ -465,7 +465,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 7.4, y: 7.4}
+  m_Size: {x: 5.4, y: 5.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -617,7 +617,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 7, y: 7}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -822,6 +822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1634288630}
   - component: {fileID: 1634288629}
+  - component: {fileID: 1634288631}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -848,8 +849,10 @@ MonoBehaviour:
   - {fileID: 3510924821347339071, guid: 5b09d325d02f1aa42bb2d40de190e746, type: 3}
   - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
   - {fileID: 947030424992002762, guid: 0e79194535e3c99429c929fe8fa69b29, type: 3}
-  width: 7
-  height: 7
+  - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+  - {fileID: 3386235688395134843, guid: 5914309dfa9c6334babcf96966dcbb88, type: 3}
+  width: 5
+  height: 5
   gemSpeed: 14
   currentState: 1
   bomb: {fileID: 862531924772948149, guid: 6c1a8f844009b1e45a28a7d16d2e2a66, type: 3}
@@ -875,6 +878,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1634288631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634288628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3913745c9d4db4c898889de00ddabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allRows:
+  - gemsInRow:
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+  - gemsInRow:
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+  - gemsInRow:
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 3386235688395134843, guid: 5914309dfa9c6334babcf96966dcbb88, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+  - gemsInRow:
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+  - gemsInRow:
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 5590157074139849316, guid: d1461db73a1057d4db8f44d2b2a54c8d, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
+    - {fileID: 2048588744429067284, guid: d2b64d130758aca43bbd6b57110cb865, type: 3}
 --- !u!1 &1694590221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1083,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 7.2, y: 7.2}
+  m_Size: {x: 5.2, y: 5.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

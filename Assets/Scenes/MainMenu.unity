@@ -251,8 +251,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mythic Gems
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 27fdb800f3aa6094c98ba35b980b167b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5103b9f956977ea4dad21d75ffe4a4bf, type: 2}
+  m_sharedMaterial: {fileID: -6189063846031635458, guid: 5103b9f956977ea4dad21d75ffe4a4bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -276,12 +276,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 279.8
+  m_fontSize: 200
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 300
+  m_fontSizeMax: 200
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
